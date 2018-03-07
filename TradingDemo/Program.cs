@@ -20,7 +20,7 @@ namespace TradingDemo
             Initialize();
             var sw = Stopwatch.StartNew();
 
-            for (var j = 0; j < 1000; j++)
+            for (var j = 0; j < 1; j++)
                 for (var i = 0; i < MAX_SYMBOLS; i++)
                 {
                     ProcessTick(i, i+1);
@@ -77,9 +77,9 @@ namespace TradingDemo
                     int index = symbolId * MAX_ACCOUNTS + val;
                     var amount = posPtr[index];
                     var change = amount * diff;
-                    var account = accountPtr[val];
-                    accountPtr[val].TotalSum += change;
-                    group[account.GroupId].TotalSum += change;
+                    var account = &accountPtr[val];
+                    (*account).TotalSum += change;
+                    group[(*account).GroupId].TotalSum += change;
                 }
             }
         }
