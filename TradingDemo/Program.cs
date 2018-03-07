@@ -20,7 +20,7 @@ namespace TradingDemo
             Initialize();
             var sw = Stopwatch.StartNew();
 
-            for (var j = 0; j < 1; j++)
+            for (var j = 0; j < 1000; j++)
                 for (var i = 0; i < MAX_SYMBOLS; i++)
                 {
                     ProcessTick(i, i+1);
