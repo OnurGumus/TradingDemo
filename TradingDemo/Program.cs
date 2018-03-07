@@ -23,7 +23,7 @@ namespace TradingDemo
             for (var j = 0; j < 1000; j++)
                 for (var i = 0; i < MAX_SYMBOLS; i++)
                 {
-                    ProcessTick(i, i+10);
+                    ProcessTick(i, i+1);
                 }
 
             Console.WriteLine(sw.Elapsed);
@@ -38,8 +38,8 @@ namespace TradingDemo
                 symbols[i] = new Symbol(1);
                 for (var j = 0; j < MAX_ACCOUNTS; j++)
                 {
-                    fixed (int* z = symbols[i].Accounts)
-                        z[j] = j;
+                    fixed (int* accountsPtr = symbols[i].Accounts)
+                        accountsPtr[j] = j;
                 }
             }
 
@@ -78,7 +78,7 @@ namespace TradingDemo
                     var amount = posPtr[index];
                     var change = amount * diff;
                     var account = accountPtr[val];
-                    account.TotalSum += change;
+                    accountPtr[val].TotalSum += change;
                     group[account.GroupId].TotalSum += change;
                 }
             }
@@ -118,7 +118,7 @@ namespace TradingDemo
 
     struct Group
     {
-        public int TotalSum;
+        public long TotalSum;
     }
 
 
