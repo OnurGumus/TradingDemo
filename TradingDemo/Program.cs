@@ -66,10 +66,10 @@ namespace TradingDemo
             fixed (int* posPtr = positionMatrix)
             {
                 var symbol = &symbolPtr[symbolId];
-                var oldPrice = (*symbol).CurrentPrice;
-                (*symbol).CurrentPrice = price;
+                var oldPrice = symbol->CurrentPrice;
+                symbol->CurrentPrice = price;
                 var diff = price - oldPrice;
-                int* ptr = (*symbol).Accounts;
+                int* ptr = symbol->Accounts;
                 for (var i = 0; i < Program.MAX_ACCOUNTS; i++)
                 {
                     var val = ptr[i];
@@ -78,8 +78,8 @@ namespace TradingDemo
                     var amount = posPtr[index];
                     var change = amount * diff;
                     var account = &accountPtr[val];
-                    (*account).TotalSum += change;
-                    group[(*account).GroupId].TotalSum += change;
+                    account->TotalSum += change;
+                    group[account->GroupId].TotalSum += change;
                 }
             }
         }
